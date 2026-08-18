@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Landing Page - Keep</title>
+  <link rel="icon" type="image/png" href="../Images/logo_keep_sozinha.png">
+</head>
+<body>
+
+  <div class="site-frame">
+
+    <header class="nav">
+      <div class="logo_keep">
+        <a href="../html/index.html">
+          <img src="../Images/logo-definitiva.png" alt="Logo do Keep">
+        </a>
+      </div>
+
+      <nav class="links">
+        <a href="#hero">Sobre</a>
+        <a href="#missao">Missão</a>
+        <a href="#equipe">Equipe</a>
+        <a href="#contato">Contato</a>
+
+      </nav>
+
+      <a href="cadastro.html" class="btn-contato">Cadastre-se</a>
+    </header>
+
+
+     <main class="cadastro-wrapper">
+    <div class="cadastro-card">
+ 
+      <div class="cadastro-cabecalho">
+        <h1>Crie sua conta no Keep</h1>
+        <p>Preencha os dados abaixo pra começar a organizar sua despensa hoje mesmo.</p>
+      </div>
+ 
+      <!-- id="formCadastro": é por esse id que o cadastro.js vai
+           encontrar o formulário e escutar o envio -->
+      <form id="formCadastro" novalidate>
+ 
+        <!-- novalidate: desliga a validação nativa (feia/inconsistente
+             entre navegadores) pra usarmos a nossa própria, no JS,
+             com mensagens estilizadas -->
+ 
+        <div class="campo">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+          <span class="erro-campo" data-erro-de="nome"></span>
+        </div>
+ 
+        <div class="campo-grupo">
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="voce@email.com" required>
+            <span class="erro-campo" data-erro-de="email"></span>
+          </div>
+ 
+          <div class="campo">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(11) 91234-5678" required>
+            <span class="erro-campo" data-erro-de="telefone"></span>
+          </div>
+        </div>
+ 
+        <div class="campo">
+          <label for="endereco">Endereço</label>
+          <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, cidade" required>
+          <span class="erro-campo" data-erro-de="endereco"></span>
+        </div>
+ 
+        <!-- SELEÇÃO DE PLANO
+             Visualmente são checkboxes (como você pediu), mas o
+             cadastro.js impede mais de um marcado ao mesmo tempo,
+             porque só faz sentido escolher um plano por vez. -->
+        <div class="campo">
+          <label class="label-grupo">Escolha seu plano</label>
+ 
+          <div class="planos-grupo" id="planosGrupo">
+ 
+            <label class="plano-card">
+              <input type="checkbox" name="plano" value="freemium" class="plano-checkbox">
+              <span class="plano-conteudo">
+                <span class="plano-nome">Freemium</span>
+                <span class="plano-preco">Grátis</span>
+                <span class="plano-desc">Ideal pra começar a organizar sua despensa pessoal.</span>
+              </span>
+            </label>
+ 
+            <label class="plano-card">
+              <input type="checkbox" name="plano" value="keepcasa" class="plano-checkbox">
+              <span class="plano-conteudo">
+                <span class="plano-nome">KeepCasa</span>
+                <span class="plano-preco">Assinatura mensal</span>
+                <span class="plano-desc">Alertas automáticos e relatórios para toda a família.</span>
+              </span>
+            </label>
+ 
+            <label class="plano-card">
+              <input type="checkbox" name="plano" value="keepbusiness" class="plano-checkbox">
+              <span class="plano-conteudo">
+                <span class="plano-nome">KeepBusiness</span>
+                <span class="plano-preco">Assinatura mensal</span>
+                <span class="plano-desc">Gestão de estoque para restaurantes e comércios.</span>
+              </span>
+            </label>
+ 
+          </div>
+ 
+          <span class="erro-campo" data-erro-de="plano"></span>
+        </div>
+ 
+        <button type="submit" class="btn-primario btn-enviar">
+          Criar minha conta
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+ 
+        <!-- mensagem de sucesso, escondida por padrão — o JS mostra
+             ela depois de validar tudo e "enviar" o formulário -->
+        <p class="mensagem-sucesso" id="mensagemSucesso">
+          Cadastro enviado com sucesso! Em breve você recebe um e-mail de confirmação.
+        </p>
+ 
+      </form>
+    </div>
+  </main>
+ 
+  <script src="../js/script.js"></script>
+</body>
+</html>

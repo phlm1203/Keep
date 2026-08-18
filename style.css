@@ -1,0 +1,1037 @@
+/* PARTE 1*/
+:root {
+  --laranja: #F2762E;
+  --laranja-escuro: #D9631F;
+  --fundo-rosa: #FCEEEA;
+  --texto: #241F1D;
+  --texto-suave: #6B615C;
+  --branco: #FFFFFF;
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* PARTE 2 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  overflow: auto !important;; /* impede a JANELA de rolar — só o #scrollBox rola */
+}
+
+body {
+  font-family: var(--font);
+  color: var(--texto);
+}
+
+/* PARTE 3. O SITE */
+.site-frame {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: var(--branco);
+}
+
+/* ==========================================================
+   ANIMAÇÃO DE ENTRADA AO ROLAR
+========================================================== */
+.anima-entrada {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.anima-entrada.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.anima-entrada.atraso-1 { transition-delay: 0.1s; }
+.anima-entrada.atraso-2 { transition-delay: 0.2s; }
+.anima-entrada.atraso-3 { transition-delay: 0.3s; }
+
+
+/* 4. CABEÇALHO DIFERENCIADO */
+header.nav {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  height: 70px;
+  background: var(--branco);
+  border-radius: 999px;
+  border: 2px solid var(--laranja);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.6rem;
+  z-index: 100;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.20);
+}
+
+.logo_keep {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.logo_keep img {
+  height: 25px;
+  width: auto;
+  display: block;
+}
+
+nav.links {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+
+nav.links a {
+  color: #FB8D2C;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  opacity: 1;
+  transition: color 0.4s;
+}
+
+nav.links a:hover {
+  color: #99380f;
+}
+
+.btn-contato {
+  background: var(--laranja);
+  color: var(--branco);
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-block;   
+  text-decoration: none;
+}
+
+.btn-contato:hover {
+  background: #99380f;
+}
+
+
+/* ==========================================================
+   5. SCROLL CONTAINER
+   O scroll-snap é 100% CSS — não depende de nenhum JS pra
+   funcionar, por isso continua aqui mesmo com o script.js vazio.
+========================================================== */
+.scroll-container {
+  height: 100%;
+  overflow-y: scroll;
+  padding-top: 96px; /* 16px (topo do header) + 64px (altura) + 16px (respiro) */
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+    background: linear-gradient(
+    to bottom,
+    #FB8D2C 0%,
+    #F97316 55%,
+    #99380f 100%
+  );
+  background-attachment: local;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+section {
+  min-height: calc(100vh - 96px);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 4rem;
+}
+
+.progresso {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+
+.progresso button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.progresso button.ativo {
+  background: var(--branco);
+  height: 26px;
+  border-radius: 5px;
+}
+
+/* ==========================================================
+   6. SEÇÃO HERO/ IMAGEM AO LADO
+========================================================== */
+#hero {
+  background: transparent;
+  position: relative; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-direction: row;
+}
+
+
+.hero-grid {
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero-texto h1 {
+  color: var(--branco);
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  line-height: 1.15;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+}
+
+.hero-texto h1 .destaque {
+  color: var(--texto);
+}
+
+.linha-curta {
+  width: 355px;
+  height: 2px;
+  background: var(--branco);
+  opacity: 0.5;
+  margin: 1rem 0 1.1rem;
+}
+
+.hero-texto p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 460px;
+  margin-bottom: 2.2rem;
+}
+
+.hero-botoes {
+  margin-bottom: 2rem;
+}
+
+.btn-primario {
+  width: fit-content; 
+  background: var(--branco);
+  color: var(--laranja);
+  border: none;
+  padding: 1rem 1.8rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+}
+
+.btn-primario:hover {
+  background: #f3f3f3;
+  transform: translateX(2px);
+}
+
+.hero-imagem {
+  flex-shrink: 0;
+}
+
+.hero-imagem img {
+  max-width: 340px;
+  height: auto;
+  display: block;
+}
+
+.grupo-celulares {
+  position: relative;   
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-imagem .celular-fundo {
+  position: absolute;
+  max-width: 195px;
+  top: 50%;
+  left: 3.0%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.celular-principal {
+  position: relative;
+  max-width: 320px;
+  z-index: 2;
+}
+
+/* ==========================================================
+   SEÇÃO O PROJETO (quadro grande + quadro aninhado)
+========================================================== */
+
+.secao-projeto {
+  background: transparent;
+  align-items: center; /* centraliza o quadro grande na tela */
+}
+.quadro-grande {
+  width: 100%;
+  max-width: 1100px;
+  background: #FFF8F1;
+  border: 3px solid var(--laranja);
+  border-radius: 32px;
+  padding: 2.8rem;
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.27);
+}
+
+/* texto (esquerda) + imagem dos celulares (direita) */
+.quadro-conteudo {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.quadro-texto h2 {
+  color: var(--laranja);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+}
+
+.quadro-texto h3 {
+  color: var(--laranja);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.quadro-texto p {
+  color: var(--texto);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.quadro-imagem1 img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.quadro-imagem2 img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.quadro-documentacao {
+  margin-top: 2.5rem;
+  background: #EAEAEA;
+  border: 2px solid var(--laranja);
+  border-radius: 24px;
+  padding: 2rem;
+}
+
+.documentacao-titulo {
+  color: var(--laranja);
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.doc-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.doc-card {
+  background: #FFF8F1;
+  border-radius: 14px;
+  padding: 1.4rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease; /* reaproveita a mesma animação de hover dos outros cards */
+}
+
+.doc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.doc-icone {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 0.8rem;
+  border-radius: 10px;
+  background: #E3DBF2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.doc-card h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 0.4rem;
+}
+
+.doc-card p {
+  font-size: 0.76rem;
+  color: var(--texto-suave);
+  margin-bottom: 0.9rem;
+}
+
+.doc-link {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--laranja);
+  text-decoration: none;
+  border: 1.5px dashed var(--laranja);
+  border-radius: 999px;
+  padding: 0.35rem 0.8rem;
+  transition: background 0.2s;
+}
+
+.doc-link:hover {
+  background: #FCE0CE;
+}
+
+/* responsivo: empilha tudo em telas estreitas */
+@media (max-width: 860px) {
+  .quadro-conteudo {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .quadro-grande {
+    padding: 1.6rem;
+  }
+}
+
+
+/* ==========================================================
+   SEÇÃO "POR TRÁS DO KEEP"
+========================================================== */
+.secao-por-tras {
+  background: transparent; 
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.por-tras-quadro {
+  width: 100%;
+  max-width: 1100px;
+  border: 3px solid var(--laranja);
+  border-radius: 32px;
+  overflow: hidden;   /* corta a imagem de fundo nos cantos arredondados */
+  padding: 5.5rem 3.5rem;
+  background-image: url('../Images/bg.png');
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+
+.por-tras-conteudo {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.por-tras-quadro h2 {
+  color: var(--branco);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.por-tras-quadro h2 .destaque {
+  color: var(--laranja);
+}
+
+.cards-vidro {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* o efeito "vidro fosco": fundo escuro translúcido +
+   blur do que está atrás dele (o próprio bg.png) */
+.card-vidro {
+  background: rgba(10, 10, 15, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px); /* Safari precisa do prefixo */
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 1.6rem;
+}
+
+.card-vidro h3 {
+  color: var(--laranja);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.card-vidro p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* responsivo: empilha os cards em telas estreitas */
+@media (max-width: 860px) {
+  .cards-vidro {
+    grid-template-columns: 1fr;
+  }
+
+  .secao-por-tras {
+    background-position: center;
+  }
+}
+
+/* ==========================================================
+   SEÇÃO PLANOS
+========================================================== */
+.secao-planos {
+  background: transparent;
+  align-items: center;
+}
+
+.planos-quadro {
+  width: 100%;
+  max-width: 1100px;
+  background: #0B1130;
+  border: 3px solid var(--laranja);
+  border-radius: 32px;
+  padding: 2.8rem;
+}
+
+.planos-titulo {
+  text-align: center;
+  color: var(--laranja);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.planos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* linha vertical separando as duas colunas, como no mockup */
+.plano-coluna:first-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  padding-right: 2rem;
+}
+
+.plano-titulo {
+  color: var(--laranja);
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 0.6rem;
+}
+
+.plano-subtitulo {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.plano-imagem {
+  background: var(--branco);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.plano-imagem img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.plano-lista {
+  list-style: none;
+  margin-bottom: 1.2rem;
+}
+
+.plano-lista li {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+/* bolinha customizada no lugar do marcador padrão de lista */
+.plano-lista li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--laranja);
+}
+
+.plano-preco {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.preco-principal {
+  display: block;
+  color: var(--laranja);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.preco-periodo {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.preco-ou {
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  margin: 0.2rem 0;
+}
+
+.preco-anual {
+  display: block;
+  color: var(--branco);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.preco-economia {
+  display: block;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.72rem;
+  margin-top: 0.2rem;
+}
+
+.btn-plano {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--branco);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-plano:hover {
+  background: var(--laranja);
+  border-color: var(--laranja);
+}
+
+/* responsivo: empilha as duas colunas em telas estreitas */
+@media (max-width: 860px) {
+  .planos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .plano-coluna:first-child {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* ==========================================================
+   8. SEÇÕES PLACEHOLDER (Equipe / Contato)
+========================================================== */
+.placeholder {
+  background: transparent;
+  align-items: center;
+  text-align: center;
+}
+
+.placeholder h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.placeholder p {
+  color: var(--texto-suave);
+  font-size: 0.88rem;
+}
+
+/* ==========================================================
+   BOTÃO VOLTAR AO TOPO
+========================================================== */
+.btn-topo {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: var(--branco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+}
+
+.btn-topo.visivel {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.btn-topo:hover {
+  background: var(--texto);
+}
+
+.btn-topo:focus-visible {
+  outline: 3px solid var(--branco);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   9. FORMULÁRIO DE CADASTRO
+========================================================== */
+
+.pagina-cadastro {
+  min-height: 100vh;
+  /* mesmo princípio do gradiente contínuo da landing, só que
+     aplicado direto no body, porque esta página rola do jeito
+     normal (sem o .scroll-container customizado) */
+  background: linear-gradient(
+    to bottom,
+    var(--laranja) 0%,
+    var(--laranja-escuro) 60%,
+    #9c3d15 100%
+  );
+  background-attachment: fixed;
+}
+ 
+ 
+/* ==========================================================
+   HEADER (versão simplificada desta página)
+========================================================== */
+.nav-cadastro {
+  /* reaproveita 100% do estilo de "header.nav" do style.css
+     (pílula branca, borda laranja, sombra) — aqui só ajustamos
+     o que muda: sem o menu, com o link de voltar no lugar */
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+}
+ 
+.link-voltar {
+  color: var(--laranja);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+ 
+.link-voltar:hover {
+  color: var(--laranja-escuro);
+}
+ 
+ 
+/* ==========================================================
+   CARTÃO DO FORMULÁRIO
+   Mesma linguagem visual dos outros "quadros" do site (fundo
+   claro, borda laranja, cantos bem arredondados).
+========================================================== */
+.cadastro-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7rem 1.5rem 3rem; /* respiro pro header fixo não cobrir o topo do card */
+}
+ 
+.cadastro-card {
+  width: 100%;
+  max-width: 640px;
+  background: #FFF8F1;
+  border: 3px solid var(--laranja);
+  border-radius: 32px;
+  padding: 2.6rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+ 
+.cadastro-cabecalho {
+  margin-bottom: 1.8rem;
+}
+ 
+.cadastro-cabecalho h1 {
+  color: var(--laranja);
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+ 
+.cadastro-cabecalho p {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+ 
+ 
+/* ==========================================================
+   CAMPOS DO FORMULÁRIO
+========================================================== */
+.campo {
+  margin-bottom: 1.3rem;
+}
+ 
+/* nome + telefone lado a lado em telas largas */
+.campo-grupo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+ 
+label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 0.4rem;
+}
+ 
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid rgba(36, 31, 29, 0.15);
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 0.92rem;
+  color: var(--texto);
+  background: var(--branco);
+  transition: border-color 0.2s;
+}
+ 
+input:focus {
+  outline: none;
+  border-color: var(--laranja);
+}
+ 
+/* classe que o JS adiciona quando o campo não passa na validação */
+input.campo-invalido {
+  border-color: #C4322B;
+}
+ 
+.erro-campo {
+  display: block;
+  min-height: 1.1rem;      /* reserva o espaço mesmo vazio, pra não "pular" o layout quando o erro aparece */
+  font-size: 0.76rem;
+  color: #C4322B;
+  margin-top: 0.3rem;
+}
+ 
+ 
+/* ==========================================================
+   CARDS DE SELEÇÃO DE PLANO
+========================================================== */
+.label-grupo {
+  margin-bottom: 0.8rem;
+}
+ 
+.planos-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+ 
+.plano-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  border: 1.5px solid rgba(36, 31, 29, 0.15);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+ 
+.plano-card:hover {
+  border-color: var(--laranja);
+}
+ 
+/* esconde o quadradinho padrão feio do navegador — vamos
+   desenhar o nosso próprio indicador visual em cima */
+.plano-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 6px;
+  border: 2px solid rgba(36, 31, 29, 0.25);
+  margin-top: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s, background 0.2s;
+}
+ 
+/* quando marcado (o JS controla isso), preenche de laranja
+   e desenha um "check" com CSS puro (sem imagem nenhuma) */
+.plano-checkbox:checked {
+  background: var(--laranja);
+  border-color: var(--laranja);
+}
+ 
+.plano-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+ 
+/* destaca o card inteiro quando o plano dele está selecionado */
+.plano-card:has(.plano-checkbox:checked) {
+  border-color: var(--laranja);
+  background: #FFF1E6;
+}
+ 
+.plano-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+ 
+.plano-nome {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--texto);
+}
+ 
+.plano-preco {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--laranja);
+}
+ 
+.plano-desc {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  margin-top: 0.2rem;
+}
+ 
+ 
+/* ==========================================================
+   BOTÃO DE ENVIO + MENSAGEM DE SUCESSO
+========================================================== */
+.btn-enviar {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.6rem;
+  background: var(--laranja);
+  color: var(--branco);
+}
+ 
+.btn-enviar:hover {
+  background: var(--laranja-escuro);
+}
+ 
+.mensagem-sucesso {
+  display: none;   /* o JS troca pra "block" só depois do envio válido */
+  margin-top: 1.2rem;
+  padding: 0.9rem 1rem;
+  background: #E4F3E1;
+  border: 1.5px solid #4A9B4E;
+  border-radius: 10px;
+  color: #2E6B31;
+  font-size: 0.85rem;
+  text-align: center;
+}
+ 
+.mensagem-sucesso.visivel {
+  display: block;
+}
+
+/* ==========================================================
+   9. RESPONSIVO
+========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
